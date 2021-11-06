@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 
 const app = express();
 require("dotenv").config();
-mongoose.connect();
+mongoose
+  .connect("mongodb://localhost/pangoline")
+
+  .then(() => console.log("Data base connected"))
+  .catch(() => console.log("Data base not connected"));
 
 app.get("/", (req, res) => {
   res.send({ message: "salam" });
