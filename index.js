@@ -1,7 +1,9 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const app = express();
 require("dotenv").config();
+mongoose.connect();
 
 app.get("/", (req, res) => {
   res.send({ message: "salam" });
