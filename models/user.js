@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const crypto = require("crypto");
 const uuid = require("uuid/v1");
 
 const userSchema = new mongoose.Schema(
@@ -58,6 +59,10 @@ userSchema.methods = {
     if (!password) return "";
 
     try {
+      return crypto
+        .createHash("sha1", this.salt)
+        .update(password)
+        .digest("hex");
     } catch (error) {}
   },
 };
