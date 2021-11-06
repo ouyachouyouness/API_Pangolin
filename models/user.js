@@ -48,11 +48,17 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.virtual("password").set(function (password) {
-  this._password = password;
-  this.salt = uuid();
-  this.hashed_password = this.cryptPassword(password);
-});
+userSchema
+  .virtual("password")
+  .set(function (password) {
+    this._password = password;
+    this.salt = uuid();
+    this.hashed_password = this.cryptPassword(password);
+  })
+
+  .get(function () {
+    return this._password;
+  });
 
 userSchema.methods = {
   cryptPassword: function (password) {
@@ -66,3 +72,5 @@ userSchema.methods = {
     } catch (error) {}
   },
 };
+
+module.exports = mongoose.model("User", userSchema);
