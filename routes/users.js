@@ -1,9 +1,7 @@
 const express = require("express");
-
+const { salam } = require("../controllers/userController");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("users module");
-});
+router.get("/", salam);
 
 module.exports = router;
