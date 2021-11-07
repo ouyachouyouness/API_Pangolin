@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const expressValidatore = require("express-validator");
 
 //import Routes
 const userRoutes = require("./routes/users");
@@ -17,6 +18,10 @@ mongoose
 
 //Route Midlleware
 app.use("/api/users", userRoutes);
+
+//midlwwar
+app.use(express.json());
+app.use(expressValidatore);
 
 const port = process.env.PORT || 3000;
 
