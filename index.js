@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const expressValidatore = require("express-validator");
-
+const cookiePaser = require("cookie-parser");
 //import Routes
 const userRoutes = require("./routes/users");
 
@@ -20,8 +20,9 @@ mongoose
 app.use("/api/users", userRoutes);
 
 //midlwwar
+app.use(cookiePaser);
 app.use(express.json());
-app.use(expressValidatore);
+// app.use(expressValidatore);
 
 const port = process.env.PORT || 3000;
 
