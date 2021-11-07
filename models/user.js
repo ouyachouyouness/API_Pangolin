@@ -36,6 +36,10 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
+    age: { type: String, trim: true },
+    famille: {},
+    race: { type: String, trim: true },
+    nourriture: { type: String, trim: true },
   },
   { timestamps: true }
 );
@@ -47,24 +51,25 @@ userSchema
     this.salt = uuid();
     this.hashed_password = this.cryptPassword(password);
   })
-
   .get(function () {
     return this._password;
   });
 
 userSchema.methods = {
-  authenticate: function (plainText) {
-    return this.cryptPassword(plainText) === this.hashed_password;
+  authentificate: function (plainText) {
+    return this.cryptPassword(plainText) === this.password;
   },
+
   cryptPassword: function (password) {
     if (!password) return "";
-
     try {
       return crypto
-        .createHash("sha1", this.salt)
+        .createHmac("sha1", this.salt)
         .update(password)
         .digest("hex");
-    } catch (error) {}
+    } catch (err) {
+      return "";
+    }
   },
 };
 
