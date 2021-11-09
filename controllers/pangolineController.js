@@ -1,6 +1,6 @@
-const user = require("../models/user");
+const user = require("../models/pangoline");
 
-exports.getOnUser = (req, res) => {
+exports.getOnPangoline = (req, res) => {
   req.profile.salt = undefined;
 
   req.profile.hashed_password = undefined;
@@ -9,7 +9,13 @@ exports.getOnUser = (req, res) => {
   });
 };
 
-exports.updateOnUser = (req, res) => {
+exports.getAllPangoline = (req, res) => {
+  res.json({
+    user: req.user,
+  });
+};
+
+exports.updateOnPangoline = (req, res) => {
   user.findOneAndUpdate(
     { _id: req.profile._id },
     { $set: req.body },
@@ -28,7 +34,7 @@ exports.updateOnUser = (req, res) => {
   );
 };
 
-exports.removeOnUser = (req, res) => {
+exports.removeOnPangoline = (req, res) => {
   let newuser = req.user;
 
   newuser.remove((err, user) => {

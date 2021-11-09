@@ -5,7 +5,7 @@ const expressValidator = require("express-validator");
 const cors = require("cors");
 //import routes
 const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/users");
+const userRoutes = require("./routes/pangolines");
 
 //config app
 const app = express();
