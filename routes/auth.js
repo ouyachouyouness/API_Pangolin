@@ -5,15 +5,12 @@ const {
   signin,
   signout,
 } = require("../controllers/authController");
-const {
-  getAllPangoline,
-  
-} = require("../controllers/pangolineController");
+const { userById } = require("../controllers/pangolineController");
 const { requireSignIn } = require("../middlewares/auth");
 const { userSignUpValidator } = require("../middlewares/userValidator");
 const router = express.Router();
 
-router.get("/", getAllPangoline);
+router.get("/:id", userById);
 
 router.post("/signup", userSignUpValidator, signup);
 router.post("/signin", signin);

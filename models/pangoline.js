@@ -36,10 +36,6 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    age: { type: String, trim: true },
-    famille: {},
-    race: { type: String, trim: true },
-    nourriture: { type: String, trim: true },
   },
   { timestamps: true }
 );

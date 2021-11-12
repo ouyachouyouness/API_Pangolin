@@ -7,6 +7,17 @@ exports.salam = (req, res) => {
   });
 };
 
+// exports.signup = (req, res) => {
+//   const user = new User(req.body);
+//   user.save((err, user) => {
+//     if (err) {
+//       return res.status(400).send(err);
+//     }
+
+//     res.send(user);
+//   });
+// };
+
 exports.signup = (req, res) => {
   const user = new User(req.body);
   user.save((err, user) => {
@@ -14,7 +25,22 @@ exports.signup = (req, res) => {
       return res.status(400).send(err);
     }
 
-    res.send(user);
+    const token = jwt.sign(
+      {
+        _id: user._id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET
+    );
+
+    res.cookie("token", token, { expire: new Date() + 1524224 });
+
+    const { _id, name, email, password } = user;
+
+    return res.json({
+      token,
+      user: { _id, name, email, password },
+    });
   });
 };
 
