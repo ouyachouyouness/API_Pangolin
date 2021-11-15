@@ -5,21 +5,19 @@ exports.getOnPangoline = (req, res) => {
   let user;
   const id = req.params.userId;
 
-  Pan.findById(id).exec((err, row) => {
+  User.findById(id).exec((err, row) => {
     if (err || !row) {
       return res.status(404).json({
         error: "user not found !",
       });
     }
 
-    return res.status(201).json({
-      pangoline: row,
-    });
+    return res.status(201).json(row.friends);
   });
 };
 
 exports.addPangoline = (req, res) => {
-  const pangoline = new Pan(req.body);
+  const pangoline = new User(req.body);
   pangoline.save((err, pan) => {
     if (err) {
       return res.status(400).send(err);
@@ -30,7 +28,7 @@ exports.addPangoline = (req, res) => {
 };
 
 exports.getAllPangoline = (req, res) => {
-  Pan.find().exec((err, rows) => {
+  User.find().exec((err, rows) => {
     if (err || !rows) {
       return res.status(404).json({
         error: "user not found !",
@@ -102,7 +100,7 @@ exports.removeOnPangoline = (req, res) => {
 
   //let newuser = req.User;
 
-  Pan.findOneAndRemove({ _id: id }).exec((err, use) => {
+  User.findOneAndRemove({ _id: id }).exec((err, use) => {
     if (err || !use) {
       return res.status(404).json({
         error: "user not found",

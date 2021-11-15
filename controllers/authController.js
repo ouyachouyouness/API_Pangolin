@@ -24,6 +24,7 @@ exports.signup = (req, res) => {
     if (err) {
       return res.status(400).send(err);
     }
+    console.log(user);
 
     const token = jwt.sign(
       {
@@ -39,7 +40,7 @@ exports.signup = (req, res) => {
 
     return res.json({
       token,
-      user: { _id, name, email, password },
+      user: { _id, name, email },
     });
   });
 };

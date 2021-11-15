@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.get("/:id", userById);
 
-router.post("/signup", userSignUpValidator, signup);
+router.post("/signup", signup);
 router.post("/signin", signin);
 router.post("/signout", signout);
 
